@@ -6,32 +6,131 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		418C38ED3000C237000EC23D /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418C38EC3000C237000EC23D /* WidgetKit.framework */; };
+		418C38EF3000C237000EC23D /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418C38EE3000C237000EC23D /* SwiftUI.framework */; };
+		418C39003000C239000EC23D /* testCaseExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 418C38EA3000C237000EC23D /* testCaseExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		418C38FE3000C239000EC23D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41C2550C2FF5185D00F6BB49 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 418C38E93000C237000EC23D;
+			remoteInfo = testCaseExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		418C39053000C239000EC23D /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				418C39003000C239000EC23D /* testCaseExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		418C38EA3000C237000EC23D /* testCaseExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = testCaseExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		418C38EC3000C237000EC23D /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		418C38EE3000C237000EC23D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		41C255142FF5185D00F6BB49 /* SecondWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecondWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		41C255262FF5185E00F6BB49 /* Exceptions for "SecondWeather" folder in "SecondWeather" target */ = {
+		418C39043000C239000EC23D /* Exceptions for "testCase" folder in "testCaseExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+			);
+			target = 418C38E93000C237000EC23D /* testCaseExtension */;
+		};
+		41C255262FF5185E00F6BB49 /* Exceptions for "Resources" folder in "SecondWeather" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				Readme.txt,
 			);
 			target = 41C255132FF5185D00F6BB49 /* SecondWeather */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		41C2554B2FF61FB000F6BB49 /* Exceptions for "Resources" folder in "Compile Sources" phase from "SecondWeather" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 41C255102FF5185D00F6BB49 /* Sources */;
+			membershipExceptions = (
+				Readme.txt,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		41C255162FF5185D00F6BB49 /* SecondWeather */ = {
+		418C38F03000C237000EC23D /* testCase */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				41C255262FF5185E00F6BB49 /* Exceptions for "SecondWeather" folder in "SecondWeather" target */,
+				418C39043000C239000EC23D /* Exceptions for "testCase" folder in "testCaseExtension" target */,
 			);
-			path = SecondWeather;
+			path = testCase;
+			sourceTree = "<group>";
+		};
+		41C255162FF5185D00F6BB49 /* Resources */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				41C255262FF5185E00F6BB49 /* Exceptions for "Resources" folder in "SecondWeather" target */,
+				41C2554B2FF61FB000F6BB49 /* Exceptions for "Resources" folder in "Compile Sources" phase from "SecondWeather" target */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		41C255312FF52DEE00F6BB49 /* App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = App;
+			sourceTree = "<group>";
+		};
+		41C255362FF52E0C00F6BB49 /* Modals */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Modals;
+			sourceTree = "<group>";
+		};
+		41C255382FF52F5B00F6BB49 /* ViewModals */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewModals;
+			sourceTree = "<group>";
+		};
+		41C255392FF52FDD00F6BB49 /* ViewControlers */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewControlers;
+			sourceTree = "<group>";
+		};
+		41C2553F2FF5308D00F6BB49 /* Repository */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		41C255852FF6427600F6BB49 /* Core */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		418C38E73000C237000EC23D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				418C38EF3000C237000EC23D /* SwiftUI.framework in Frameworks */,
+				418C38ED3000C237000EC23D /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41C255112FF5185D00F6BB49 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -42,10 +141,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		418C38EB3000C237000EC23D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				418C38EC3000C237000EC23D /* WidgetKit.framework */,
+				418C38EE3000C237000EC23D /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		41C2550B2FF5185D00F6BB49 = {
 			isa = PBXGroup;
 			children = (
-				41C255162FF5185D00F6BB49 /* SecondWeather */,
+				41C255852FF6427600F6BB49 /* Core */,
+				41C255392FF52FDD00F6BB49 /* ViewControlers */,
+				41C255382FF52F5B00F6BB49 /* ViewModals */,
+				41C255362FF52E0C00F6BB49 /* Modals */,
+				41C2553F2FF5308D00F6BB49 /* Repository */,
+				41C255312FF52DEE00F6BB49 /* App */,
+				41C255162FF5185D00F6BB49 /* Resources */,
+				418C38F03000C237000EC23D /* testCase */,
+				418C38EB3000C237000EC23D /* Frameworks */,
 				41C255152FF5185D00F6BB49 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				41C255142FF5185D00F6BB49 /* SecondWeather.app */,
+				418C38EA3000C237000EC23D /* testCaseExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,6 +178,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		418C38E93000C237000EC23D /* testCaseExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 418C39013000C239000EC23D /* Build configuration list for PBXNativeTarget "testCaseExtension" */;
+			buildPhases = (
+				418C38E63000C237000EC23D /* Sources */,
+				418C38E73000C237000EC23D /* Frameworks */,
+				418C38E83000C237000EC23D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				418C38F03000C237000EC23D /* testCase */,
+			);
+			name = testCaseExtension;
+			packageProductDependencies = (
+			);
+			productName = testCaseExtension;
+			productReference = 418C38EA3000C237000EC23D /* testCaseExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		41C255132FF5185D00F6BB49 /* SecondWeather */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41C255272FF5185E00F6BB49 /* Build configuration list for PBXNativeTarget "SecondWeather" */;
@@ -68,13 +207,21 @@
 				41C255102FF5185D00F6BB49 /* Sources */,
 				41C255112FF5185D00F6BB49 /* Frameworks */,
 				41C255122FF5185D00F6BB49 /* Resources */,
+				418C39053000C239000EC23D /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				418C38FF3000C239000EC23D /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				41C255162FF5185D00F6BB49 /* SecondWeather */,
+				41C255162FF5185D00F6BB49 /* Resources */,
+				41C255312FF52DEE00F6BB49 /* App */,
+				41C255362FF52E0C00F6BB49 /* Modals */,
+				41C255382FF52F5B00F6BB49 /* ViewModals */,
+				41C255392FF52FDD00F6BB49 /* ViewControlers */,
+				41C2553F2FF5308D00F6BB49 /* Repository */,
+				41C255852FF6427600F6BB49 /* Core */,
 			);
 			name = SecondWeather;
 			packageProductDependencies = (
@@ -93,6 +240,9 @@
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
+					418C38E93000C237000EC23D = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
 					41C255132FF5185D00F6BB49 = {
 						CreatedOnToolsVersion = 26.0.1;
 					};
@@ -113,11 +263,19 @@
 			projectRoot = "";
 			targets = (
 				41C255132FF5185D00F6BB49 /* SecondWeather */,
+				418C38E93000C237000EC23D /* testCaseExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		418C38E83000C237000EC23D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41C255122FF5185D00F6BB49 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -128,6 +286,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		418C38E63000C237000EC23D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41C255102FF5185D00F6BB49 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,7 +302,75 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		418C38FF3000C239000EC23D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 418C38E93000C237000EC23D /* testCaseExtension */;
+			targetProxy = 418C38FE3000C239000EC23D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		418C39023000C239000EC23D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SQ6Y32KD2L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = testCase/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = testCase;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = none.SecondWeather.testCase;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		418C39033000C239000EC23D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SQ6Y32KD2L;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = testCase/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = testCase;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = none.SecondWeather.testCase;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		41C255282FF5185E00F6BB49 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -147,12 +380,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SQ6Y32KD2L;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SecondWeather/Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -179,12 +411,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SQ6Y32KD2L;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SecondWeather/Info.plist;
+				INFOPLIST_FILE = Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -326,6 +557,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		418C39013000C239000EC23D /* Build configuration list for PBXNativeTarget "testCaseExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				418C39023000C239000EC23D /* Debug */,
+				418C39033000C239000EC23D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		41C2550F2FF5185D00F6BB49 /* Build configuration list for PBXProject "SecondWeather" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
