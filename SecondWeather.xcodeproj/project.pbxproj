@@ -51,22 +51,22 @@
 			);
 			target = 418C38E93000C237000EC23D /* testCaseExtension */;
 		};
-		41C255262FF5185E00F6BB49 /* Exceptions for "Resources" folder in "SecondWeather" target */ = {
+		418F8834300634FC00944FAF /* Exceptions for "Shared" folder in "SecondWeather" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
-				Readme.txt,
+				Resources/Info.plist,
+				Resources/Readme.txt,
 			);
 			target = 41C255132FF5185D00F6BB49 /* SecondWeather */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		41C2554B2FF61FB000F6BB49 /* Exceptions for "Resources" folder in "Compile Sources" phase from "SecondWeather" target */ = {
+		418F8835300634FC00944FAF /* Exceptions for "Shared" folder in "Compile Sources" phase from "SecondWeather" target */ = {
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = 41C255102FF5185D00F6BB49 /* Sources */;
 			membershipExceptions = (
-				Readme.txt,
+				Resources/Readme.txt,
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -80,43 +80,33 @@
 			path = testCase;
 			sourceTree = "<group>";
 		};
-		41C255162FF5185D00F6BB49 /* Resources */ = {
+		418F88013006345000944FAF /* Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				41C255262FF5185E00F6BB49 /* Exceptions for "Resources" folder in "SecondWeather" target */,
-				41C2554B2FF61FB000F6BB49 /* Exceptions for "Resources" folder in "Compile Sources" phase from "SecondWeather" target */,
+				418F8834300634FC00944FAF /* Exceptions for "Shared" folder in "SecondWeather" target */,
+				418F8835300634FC00944FAF /* Exceptions for "Shared" folder in "Compile Sources" phase from "SecondWeather" target */,
 			);
-			path = Resources;
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		418F88073006349E00944FAF /* Domain */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		418F880B300634D500944FAF /* Data */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Data;
+			sourceTree = "<group>";
+		};
+		418F88363006353400944FAF /* Presentation */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		41C255312FF52DEE00F6BB49 /* App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = App;
-			sourceTree = "<group>";
-		};
-		41C255362FF52E0C00F6BB49 /* Modals */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Modals;
-			sourceTree = "<group>";
-		};
-		41C255382FF52F5B00F6BB49 /* ViewModals */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ViewModals;
-			sourceTree = "<group>";
-		};
-		41C255392FF52FDD00F6BB49 /* ViewControlers */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ViewControlers;
-			sourceTree = "<group>";
-		};
-		41C2553F2FF5308D00F6BB49 /* Repository */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Repository;
-			sourceTree = "<group>";
-		};
-		41C255852FF6427600F6BB49 /* Core */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -153,13 +143,11 @@
 		41C2550B2FF5185D00F6BB49 = {
 			isa = PBXGroup;
 			children = (
-				41C255852FF6427600F6BB49 /* Core */,
-				41C255392FF52FDD00F6BB49 /* ViewControlers */,
-				41C255382FF52F5B00F6BB49 /* ViewModals */,
-				41C255362FF52E0C00F6BB49 /* Modals */,
-				41C2553F2FF5308D00F6BB49 /* Repository */,
+				418F88013006345000944FAF /* Shared */,
+				418F88363006353400944FAF /* Presentation */,
+				418F88073006349E00944FAF /* Domain */,
+				418F880B300634D500944FAF /* Data */,
 				41C255312FF52DEE00F6BB49 /* App */,
-				41C255162FF5185D00F6BB49 /* Resources */,
 				418C38F03000C237000EC23D /* testCase */,
 				418C38EB3000C237000EC23D /* Frameworks */,
 				41C255152FF5185D00F6BB49 /* Products */,
@@ -215,13 +203,11 @@
 				418C38FF3000C239000EC23D /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				41C255162FF5185D00F6BB49 /* Resources */,
+				418F88013006345000944FAF /* Shared */,
+				418F88073006349E00944FAF /* Domain */,
+				418F880B300634D500944FAF /* Data */,
+				418F88363006353400944FAF /* Presentation */,
 				41C255312FF52DEE00F6BB49 /* App */,
-				41C255362FF52E0C00F6BB49 /* Modals */,
-				41C255382FF52F5B00F6BB49 /* ViewModals */,
-				41C255392FF52FDD00F6BB49 /* ViewControlers */,
-				41C2553F2FF5308D00F6BB49 /* Repository */,
-				41C255852FF6427600F6BB49 /* Core */,
 			);
 			name = SecondWeather;
 			packageProductDependencies = (
@@ -380,7 +366,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SQ6Y32KD2L;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_FILE = Shared/Resources/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -411,7 +399,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SQ6Y32KD2L;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_FILE = Shared/Resources/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
