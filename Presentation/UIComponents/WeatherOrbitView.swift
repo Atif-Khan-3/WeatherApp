@@ -100,7 +100,6 @@ class WeatherOrbitView: UIView {
     
 
     private func buildScene(weatherforcast: WeatherDayModel, windDirectionDegrees: Float) {
-        // Reset everything so config() can be called again safely.
         tempSlot.children.removeAll()
         moonSlot.children.removeAll()
         vaneSlot.children.removeAll()
@@ -110,19 +109,14 @@ class WeatherOrbitView: UIView {
         tempEntity = nil
         moonEntity = nil
         vaneEntity = nil
-        currentFrontIndex = 0
-        carouselAngle = 0
-        carouselPivot.orientation = simd_quatf(angle: 0, axis: SIMD3<Float>(0, 1, 0))
 
         let anchorEntity = AnchorEntity(world: .zero)
 
-        // 1. Temperature digits, orbit slot 0.
         let digitChars = weatherforcast.tempC.map { String($0) }
         let tempGroup = buildDigitsGroup(digitChars)
         tempGroup.generateCollisionShapes(recursive: true)
         tempEntity = tempGroup
         place(tempGroup, into: tempSlot, atAngle: slotAngles[0])
-        // 2. Moon, orbit slot 1. Tilt reflects illumination percentage.
         if let moon = loadMoon() {
             moon.generateCollisionShapes(recursive: true)
             moonEntity = moon
@@ -130,7 +124,6 @@ class WeatherOrbitView: UIView {
             place(moon, into: moonSlot, atAngle: slotAngles[1])
         }
 
-        // 3. Weather vane, orbit slot 2. Yaw reflects wind direction.
         if let vane = loadWeatherVane() {
             vane.generateCollisionShapes(recursive: true)
             vaneEntity = vane
@@ -351,7 +344,7 @@ class WeatherOrbitView: UIView {
     private func advanceCarousel(forward: Bool) {
         currentFrontIndex = (currentFrontIndex + (forward ? 1 : -1) + 3) % 3
         carouselAngle += forward ? -carouselStep : carouselStep
-
+      //  print("🚨\(currentFrontIndex)")
         carouselPivot.move(
             to: Transform(
                 scale: carouselPivot.scale,

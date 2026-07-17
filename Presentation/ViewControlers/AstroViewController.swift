@@ -11,6 +11,21 @@ class AstroViewController: UIViewController {
     private let weatherView = WeatherOrbitView()
     private lazy var viewModel = WeatherViewModel(repository: WeatherRepo(network: NetworkManager()))
     private var forecastCollectionView: UICollectionView!
+    
+    
+    private let infoStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.spacing = 8
+        stack.distribution = .fillEqually
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    private let windRow = WeatherInfoRowView()
+    private let humidityRow = WeatherInfoRowView()
+    private let pressureRow = WeatherInfoRowView()
+    private let uvRow = WeatherInfoRowView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.reloadUI = { [weak self] in
@@ -20,36 +35,20 @@ class AstroViewController: UIViewController {
             viewModel.prepareWeatherData()
             print("\(viewModel.weatherDays)")
             setupUIHorizontalScroll()
-            
+            weatherView.config(weatherforcast: viewModel.weatherDays[0], weather: .partialCloudy)
+            setupInfoStack()
         }
         view.addSubview(weatherView)
                 weatherView.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
-                    weatherView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                    weatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                    weatherView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                    weatherView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-                ])
-        let today = WeatherDayModel(
-                    day: "Tuesday",
-                    tempC: "24",
-                    tempCMax: "27",
-                    tempCMin: "19",
-                    text: "Partly Cloudy",
-                    icon: "116",
-                    moonPhases: "Waxing Gibbous",
-                    moonRise: "18:20",
-                    moonSet: "05:10",
-                    moonIlumination: 90,
-                    sunRise: "05:45",
-                    sunSet: "19:32",
-                    sunUVIndex: "6"
-                )
-        weatherView.config(
-                  weatherforcast: today,
-                  weather: .partialCloudy,
-                  windDirectionDegrees: 0
-              )
+               
+       
+        NSLayoutConstraint.activate([
+            weatherView.topAnchor.constraint(equalTo: view.topAnchor),
+            weatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            weatherView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            weatherView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+        ])
         setupUIHorizontalScroll()
         
         viewModel.fetchWeather(city: "Islamabad")
@@ -72,19 +71,47 @@ class AstroViewController: UIViewController {
         forecastCollectionView.register(ForecastViewCell.self, forCellWithReuseIdentifier: ForecastViewCell.identifier)
        
        
+        
+        
         forecastCollectionView.showsHorizontalScrollIndicator = false
         view.addSubview(forecastCollectionView)
         
+        
+      
+
+        
         NSLayoutConstraint.activate([
+            forecastCollectionView.heightAnchor.constraint(equalToConstant: 100),
             forecastCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: 10),
             forecastCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            forecastCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            forecastCollectionView.heightAnchor.constraint(equalToConstant: 100)
+            forecastCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+           
+
+            
         ])
         forecastCollectionView.layer.zPosition = 1
        
     }
-  
+    func setupInfoStack() {
+        windRow.configure(title: "wind", value: "10")
+        humidityRow.configure(title: "humidity", value: "55%")
+        pressureRow.configure(title: "pressure", value: "1013 hPa")
+        uvRow.configure(title: "uv index", value: "3")
+
+        [windRow, humidityRow, pressureRow, uvRow].forEach {
+            infoStackView.addArrangedSubview($0)
+        }
+
+        view.addSubview(infoStackView)
+        infoStackView.layer.zPosition = 1
+
+        NSLayoutConstraint.activate([
+            infoStackView.bottomAnchor.constraint(equalTo: forecastCollectionView.topAnchor, constant: -10),
+            infoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            infoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
+            
+        ])
+    }
 
 }
 

@@ -127,9 +127,11 @@
         let tempC: Double
         let humidity: Int
         let chanceOfRain: Int
-
         let condition: Condition
-
+        let winddegree: Int
+        let windSpeed: Double
+        let windDirection: String
+        let airPressure: Double
         enum CodingKeys: String, CodingKey {
 
             case time
@@ -141,6 +143,14 @@
             case chanceOfRain = "chance_of_rain"
 
             case condition
+            
+            case winddegree = "wind_degree"
+            
+            case windSpeed = "wind_mph"
+            
+            case windDirection = "wind_dir"
+            
+            case airPressure = "pressure_mb"
 
         }
 

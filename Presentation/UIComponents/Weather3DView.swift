@@ -93,7 +93,7 @@ class Weather3DView: UIView {
             
         if weatherforcast.text.caseInsensitiveCompare(Weather.sunny.rawValue) == .orderedSame{
             loadPartialClouds(into: rootPivot)
-            if let bird = loadMoon() {
+            if let bird = loadBird() {
                 self.bird = bird
                 bird.position = SIMD3<Float>(orbitRadius, 0.15, 0)
                 orbitPivot.addChild(bird)
@@ -122,13 +122,13 @@ class Weather3DView: UIView {
                 loadStormClouds(into: rootPivot)
             case .sunny:
                 print("Sunny case in Switch is used")
-//                loadPartialClouds(into: rootPivot)
-//                if let bird = loadBird() {
-//                    self.bird = bird
-//                    bird.position = SIMD3<Float>(orbitRadius, 0.15, 0)
-//                    orbitPivot.addChild(bird)
-//                    rootPivot.addChild(orbitPivot)
-//                }
+                loadPartialClouds(into: rootPivot)
+                if let bird = loadBird() {
+                    self.bird = bird
+                    bird.position = SIMD3<Float>(orbitRadius, 0.15, 0)
+                    orbitPivot.addChild(bird)
+                    rootPivot.addChild(orbitPivot)
+                }
             }
         }
         
@@ -147,7 +147,7 @@ class Weather3DView: UIView {
                  relativeTo: sun.parent, duration: 0.5,
                  timingFunction: .easeInOut)
         setupPanRotationGesture()
-     //   startBirdOrbitAnimation()
+        startBirdOrbitAnimation()
     }
 
     private func buildDigitsGroup(_ digits: [String]) -> ModelEntity {

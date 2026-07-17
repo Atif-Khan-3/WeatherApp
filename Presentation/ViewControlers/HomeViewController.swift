@@ -10,6 +10,7 @@ import UIKit
 class HomeViewController: UIViewController {
     private var forecastCollectionView: UICollectionView!
     var tempurature:[String] = []
+   
     var weatherViews : [Weather] = [.clear,.sunny,.partialCloudy,.cloudy,.raining,.storm,.raining]
     private lazy var viewModel = WeatherViewModel(repository: WeatherRepo(network: NetworkManager())
     )
@@ -82,6 +83,13 @@ class HomeViewController: UIViewController {
         self.tempurature = weatherforcast.tempC.map { String($0) }
         weather3DModelCurrent.removeFromSuperview()
         weather3DModelCurrent = Weather3DView()
+        let tap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(tapped3DView)
+        )
+
+        weather3DModelCurrent.isUserInteractionEnabled = true
+        weather3DModelCurrent.addGestureRecognizer(tap)
         
         weather3DModelCurrent.translatesAutoresizingMaskIntoConstraints = false
         weather3DModelCurrent.config(weatherforcast: weatherforcast, weather: weathertype)
@@ -89,10 +97,10 @@ class HomeViewController: UIViewController {
         view.addSubview(weatherLabel)
         view.addSubview(weather3DModelCurrent)
         NSLayoutConstraint.activate([
-            weather3DModelCurrent.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            weather3DModelCurrent.topAnchor.constraint(equalTo: view.topAnchor),
+            weather3DModelCurrent.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             weather3DModelCurrent.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             weather3DModelCurrent.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            weather3DModelCurrent.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             weatherLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             weatherLabel.bottomAnchor.constraint(equalTo: forecastCollectionView.topAnchor)
         ])
@@ -116,7 +124,11 @@ extension HomeViewController:UICollectionViewDataSource,UICollectionViewDelegate
         let weather = viewModel.weatherDays[indexPath.row]
         setupWeatherView(weatherforcast: weather, weathertype:weatherViews[indexPath.row] )
     }
-    
+    @objc func tapped3DView(){
+        print("Home screen Tapped")
+        let astroView = AstroViewController()
+        self.navigationController?.pushViewController(astroView, animated: true)
+    }
     
 }
 
