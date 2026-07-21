@@ -10,7 +10,7 @@ class WeatherOrbitView: UIView {
 
     private let carouselPivot = Entity()
 
-    
+    private  var viewModel = WeatherViewModel(repository: WeatherRepo(network: NetworkManager()))
     private let tempSlot = Entity()
     private let moonSlot = Entity()
     private let vaneSlot = Entity()
@@ -92,14 +92,16 @@ class WeatherOrbitView: UIView {
         arView.scene.addAnchor(fillLightAnchor)
     }
 
-    public func config(weatherforcast: WeatherDayModel, weather: Weather, windDirectionDegrees: Float = 0) {
+    public func config( viewModel: WeatherViewModel) {
         arView.scene.anchors.removeAll()
-        buildScene(weatherforcast: weatherforcast, windDirectionDegrees: windDirectionDegrees)
+        self.viewModel = viewModel
+        buildScene(weatherforcast: self.viewModel.weatherDays[viewModel.selectedDay])
     }
 
     
 
-    private func buildScene(weatherforcast: WeatherDayModel, windDirectionDegrees: Float) {
+    private func buildScene(weatherforcast: WeatherDayModel) {
+        
         tempSlot.children.removeAll()
         moonSlot.children.removeAll()
         vaneSlot.children.removeAll()
@@ -127,7 +129,7 @@ class WeatherOrbitView: UIView {
         if let vane = loadWeatherVane() {
             vane.generateCollisionShapes(recursive: true)
             vaneEntity = vane
-            applyWindDirection(vane, degrees: windDirectionDegrees)
+            applyWindDirection(vane, degrees: Float(weatherforcast.winddegree))
             place(vane, into: vaneSlot, atAngle: slotAngles[2])
         }
 
@@ -200,6 +202,7 @@ class WeatherOrbitView: UIView {
 
         var whiteMaterial = PhysicallyBasedMaterial()
         whiteMaterial.baseColor = .init(tint: .white)
+        whiteMaterial.emissiveColor = .init(color: .systemGray6)
         whiteHemisphere.model?.materials = [whiteMaterial]
 
         var blackMaterial = PhysicallyBasedMaterial()
@@ -260,7 +263,7 @@ class WeatherOrbitView: UIView {
     
     private func applyWindDirection(_ vane: ModelEntity, degrees: Float) {
         let radians = degrees * .pi / 180
-        vane.orientation = simd_quatf(angle: .pi, axis: SIMD3<Float>(0, 1, 0))
+        vane.orientation = simd_quatf(angle: radians, axis: SIMD3<Float>(0, 1, 0))
     }
 
     private func setupGestures() {
@@ -343,8 +346,10 @@ class WeatherOrbitView: UIView {
 
     private func advanceCarousel(forward: Bool) {
         currentFrontIndex = (currentFrontIndex + (forward ? 1 : -1) + 3) % 3
+        self.viewModel.front = currentFrontIndex
+        
         carouselAngle += forward ? -carouselStep : carouselStep
-      //  print("🚨\(currentFrontIndex)")
+       print("🚨\(self.viewModel.front)   \(self.viewModel.front)")
         carouselPivot.move(
             to: Transform(
                 scale: carouselPivot.scale,

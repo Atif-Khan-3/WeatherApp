@@ -6,7 +6,11 @@
 //
 
 import Foundation
-class WeatherViewModel {
+import Combine
+class WeatherViewModel: ObservableObject {
+    
+    @Published var front: Int = 0
+    @Published var selectedDay: Int = 0
     static let shared = LocationManager()
     private let repository: ForecastProtocol
     var weatherDays: [WeatherDayModel] = []
@@ -66,7 +70,11 @@ class WeatherViewModel {
                     moonIlumination: forecastDay.astro.moon_illumination,
                     sunRise: forecastDay.astro.sunrise,
                     sunSet: forecastDay.astro.sunset,
-                    sunUVIndex: "\(forecastDay.day.UV)"
+                    sunUVIndex: "\(forecastDay.day.UV)",
+                    winddegree: forecastDay.hour[0].winddegree,
+                    windSpeed: forecastDay.hour[0].windSpeed,
+                    windDirection: forecastDay.hour[0].windDirection,
+                    airPressure: forecastDay.hour[0].airPressure
                     
                 )
                 
@@ -94,5 +102,11 @@ struct WeatherDayModel {
     let sunRise:String
     let sunSet:String
     let sunUVIndex:String
+    
+    
+    let winddegree: Int
+    let windSpeed: Double
+    let windDirection: String
+    let airPressure: Double
     
 }

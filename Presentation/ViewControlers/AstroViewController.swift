@@ -6,12 +6,13 @@
 //
 
 import UIKit
-
+import Combine
 class AstroViewController: UIViewController {
     private let weatherView = WeatherOrbitView()
     private lazy var viewModel = WeatherViewModel(repository: WeatherRepo(network: NetworkManager()))
     private var forecastCollectionView: UICollectionView!
     
+    private var cancellables = Set<AnyCancellable>()
     
     private let infoStackView: UIStackView = {
         let stack = UIStackView()
@@ -31,17 +32,28 @@ class AstroViewController: UIViewController {
         viewModel.reloadUI = { [weak self] in
             guard let self, let temp = self.viewModel.weather?.current.tempC else { return }
             let tempString = String(Int(temp))
+            viewModel.$front
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] state in
+                    self?.setupInfoStack(front: state)
+                }
+                .store(in: &cancellables)
+            
             
             viewModel.prepareWeatherData()
             print("\(viewModel.weatherDays)")
             setupUIHorizontalScroll()
-            weatherView.config(weatherforcast: viewModel.weatherDays[0], weather: .partialCloudy)
-            setupInfoStack()
+            weatherView.config(viewModel: self.viewModel)
+            
+            
+            
+            
         }
+        
         view.addSubview(weatherView)
-                weatherView.translatesAutoresizingMaskIntoConstraints = false
-               
-       
+        weatherView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
         NSLayoutConstraint.activate([
             weatherView.topAnchor.constraint(equalTo: view.topAnchor),
             weatherView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -69,50 +81,101 @@ class AstroViewController: UIViewController {
         forecastCollectionView.dataSource = self
         forecastCollectionView.delegate = self
         forecastCollectionView.register(ForecastViewCell.self, forCellWithReuseIdentifier: ForecastViewCell.identifier)
-       
-       
+        
+        
         
         
         forecastCollectionView.showsHorizontalScrollIndicator = false
         view.addSubview(forecastCollectionView)
         
         
-      
-
+        
+        
         
         NSLayoutConstraint.activate([
             forecastCollectionView.heightAnchor.constraint(equalToConstant: 100),
             forecastCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: 10),
             forecastCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             forecastCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-           
-
+            
+            
             
         ])
         forecastCollectionView.layer.zPosition = 1
-       
+        
     }
-    func setupInfoStack() {
-        windRow.configure(title: "wind", value: "10")
-        humidityRow.configure(title: "humidity", value: "55%")
-        pressureRow.configure(title: "pressure", value: "1013 hPa")
-        uvRow.configure(title: "uv index", value: "3")
+    func setupInfoStack(front: Int) {
+        print("🚨\(self.viewModel.selectedDay)")
+        if front == 2 {
+            infoStackView.isHidden = false
 
-        [windRow, humidityRow, pressureRow, uvRow].forEach {
-            infoStackView.addArrangedSubview($0)
-        }
-
-        view.addSubview(infoStackView)
-        infoStackView.layer.zPosition = 1
-
-        NSLayoutConstraint.activate([
-            infoStackView.bottomAnchor.constraint(equalTo: forecastCollectionView.topAnchor, constant: -10),
-            infoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
-            infoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
+            windRow.configure(title: "Wind", value: "\(self.viewModel.weatherDays[self.viewModel.selectedDay].windSpeed)")
+            humidityRow.configure(title: "Direction", value: "\(self.viewModel.weatherDays[self.viewModel.selectedDay].windDirection)")
+            pressureRow.configure(title: "Pressure", value: "\(self.viewModel.weatherDays[self.viewModel.selectedDay].airPressure)")
+            uvRow.configure(title: "Degree", value: "\(self.viewModel.weatherDays[self.viewModel.selectedDay].winddegree)")
             
-        ])
+            [windRow, humidityRow, pressureRow, uvRow].forEach {
+                infoStackView.addArrangedSubview($0)
+            }
+            
+            view.addSubview(infoStackView)
+            infoStackView.layer.zPosition = 1
+            
+            NSLayoutConstraint.activate([
+                infoStackView.bottomAnchor.constraint(equalTo: forecastCollectionView.topAnchor, constant: -10),
+                infoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+                infoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
+                
+            ])
+        }
+        else if front == 1 {
+            infoStackView.isHidden = false
+            windRow.configure(title: "Moon Illumination", value: "\(self.viewModel.weatherDays[self.viewModel.selectedDay].moonIlumination)%")
+            humidityRow.configure(title: "Phase", value: "\(self.viewModel.weatherDays[self.viewModel.selectedDay].moonPhases)")
+            pressureRow.configure(title: "Moon Rise", value: "\(self.viewModel.weatherDays[self.viewModel.selectedDay].moonRise)")
+            uvRow.configure(title: "Moon Set", value: "\(self.viewModel.weatherDays[self.viewModel.selectedDay].moonSet)")
+            
+            [windRow, humidityRow, pressureRow, uvRow].forEach {
+                infoStackView.addArrangedSubview($0)
+            }
+            
+            view.addSubview(infoStackView)
+            infoStackView.layer.zPosition = 1
+            
+            NSLayoutConstraint.activate([
+                infoStackView.bottomAnchor.constraint(equalTo: forecastCollectionView.topAnchor, constant: -10),
+                infoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+                infoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
+                
+            ])
+        }
+        else if front == 0 {
+            infoStackView.isHidden = false
+            windRow.configure(title: "Day", value: "\(self.viewModel.weatherDays[self.viewModel.selectedDay].text)")
+            humidityRow.configure(title: "Tempurature", value: "\(self.viewModel.weatherDays[self.viewModel.selectedDay].tempC)")
+            pressureRow.configure(title: "Max Tempurature", value: "\(self.viewModel.weatherDays[self.viewModel.selectedDay].tempCMin)")
+            uvRow.configure(title: "Min Tempurature", value: "\(self.viewModel.weatherDays[self.viewModel.selectedDay].tempCMax)")
+            
+            [windRow, humidityRow, pressureRow, uvRow].forEach {
+                infoStackView.addArrangedSubview($0)
+            }
+            
+            view.addSubview(infoStackView)
+            infoStackView.layer.zPosition = 1
+            
+            NSLayoutConstraint.activate([
+                infoStackView.bottomAnchor.constraint(equalTo: forecastCollectionView.topAnchor, constant: -10),
+                infoStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+                infoStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12)
+                
+            ])
+        }
+        else{
+            infoStackView.isHidden = true
+            
+        }
     }
-
+    
 }
 
 extension AstroViewController:UICollectionViewDataSource,UICollectionViewDelegate{
@@ -127,11 +190,16 @@ extension AstroViewController:UICollectionViewDataSource,UICollectionViewDelegat
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let weather = viewModel.weatherDays[indexPath.row]
+        viewModel.selectedDay = indexPath.row
         weatherView.config(
-                  weatherforcast: weather,
-                  weather: .partialCloudy,
-                  windDirectionDegrees: 0
-              )
+            viewModel: self.viewModel
+        )
+        viewModel.$front
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state in
+                self?.setupInfoStack(front: state)
+            }
+            .store(in: &cancellables)
     }
     
     

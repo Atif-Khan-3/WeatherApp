@@ -14,7 +14,7 @@ class WeatherInfoRowView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.monospacedSystemFont(ofSize: 16, weight: .medium)
-        label.textColor = .black
+       label.textColor = .black
         label.setContentHuggingPriority(.required, for: .horizontal)
         label.text = "nil"
         return label
