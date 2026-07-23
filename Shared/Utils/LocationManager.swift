@@ -34,8 +34,7 @@ class LocationManager: NSObject,ObservableObject {
                manager.requestLocation()
            }
        }
-    
-    
+   
     
 }
 extension LocationManager:CLLocationManagerDelegate{
